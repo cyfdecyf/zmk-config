@@ -1,0 +1,11 @@
+file_format: "1"
+id: c_dux
+name: C. Dux
+type: shield
+url: https://github.com/cyfdecyf/c-dux
+requires: [pro_micro]
+features:
+  - keys
+siblings:
+  - c_dux_left
+  - c_dux_right
