@@ -3,3 +3,7 @@
 &matrix_transform0 {
     row-offset = <1>;
 };
+
+&right_encoder {
+    status = "okay";
+};

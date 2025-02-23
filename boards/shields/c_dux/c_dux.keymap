@@ -2,17 +2,37 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            layers = <0>;
+            bindings = <&kp ESC>;
+        };
+
+        combo_unlock {
+            timeout-ms = <50>;
+            key-positions = <3 4 32>;
+            layers = <0>;
+            bindings = <&studio_unlock>;
+        };
+    };
 
     keymap {
         compatible = "zmk,keymap";
 
         base_layer {
+            display-name = "base";
             bindings = <
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P
                 &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J     &kp K     &kp L     &kp SEMI
                 &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &kp BSPC  &kp TAB   &kp LSHFT &kp LALT  &kp ENTER &kp SPACE
+                                    &kp BSPC  &kp TAB   &kp LSHFT &kp LCTRL &kp ENTER &kp SPACE
             >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_UP PG_DN>;
         };
 
     };
