@@ -14,11 +14,13 @@ Run following commands to build firmware for the central/left and right half of 
 
 ```bash
 MDIR=<path to this repo>
+COMMON_OPT="-DZMK_EXTRA_MODULES='$MDIR' -DZMK_CONFIG='$MDIR/config'"
 
+cd <path to ZMK repo>/app
 # For the central/left half:
-west build -d build/c_dux_left -b nice_nano_v2 -S studio-rpc-usb-uart -- -DZMK_EXTRA_MODULES="$MDIR" -DSHIELD=c_dux_left -DCONFIG_ZMK_STUDIO=y
+west build -d build/c_dux_left -b nice_nano_v2 -S studio-rpc-usb-uart -- $COMMON_OPT -DSHIELD=c_dux_left -DCONFIG_ZMK_STUDIO=y
 # For the right half:
-west build -d build/c_dux_right -b nice_nano_v2 -- -DZMK_EXTRA_MODULES="$MDIR" -DSHIELD=c_dux_right
+west build -d build/c_dux_right -b nice_nano_v2 -- $COMMON_OPT -DSHIELD=c_dux_right
 ```
 
 Firmware files will be located in `build/c_dux_left/zephyr/zmk.uf2` and `build/c_dux_right/zephyr/zmk.uf2`.
