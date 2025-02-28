@@ -1,0 +1,698 @@
+/*
+ * Keymap config for the c_dux keyboard. Referencing my Glove80 keymap.
+ */
+
+#include <behaviors.dtsi>
+/* Include all behavior includes needed */
+/* For selecting output, e.g. BLE, USB */
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define LAYER_Base 0
+#define LAYER_Lower 1
+#define LAYER_Magic 2
+#define LAYER_Cursor 3
+#define LAYER_Symbol 4
+#define LAYER_Number 5
+#define LAYER_Tmux 6
+#define LAYER_AltTab 7
+#define LAYER_CtrlTab 8
+
+/* To deal with the situation where there is no Lower layer, to keep &lower happy */
+#ifndef LAYER_Lower
+#define LAYER_Lower 0
+#endif
+
+/ {
+    behaviors {
+        // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
+        // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
+        lower: lower {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo LAYER_Lower>, <&to LAYER_Lower>;
+        };
+
+        magic: magic {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&bt_select_0>;
+        };
+    };
+};
+
+
+/* Bluetooth releated. With BT_DISC_CMD support. */
+/ {
+    behaviors {
+        bt_0: bt_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_0>, <&bt BT_DISC 0>;
+        };
+        bt_1: bt_1 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_1>, <&bt BT_DISC 1>;
+        };
+        bt_2: bt_2 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_2>, <&bt BT_DISC 2>;
+        };
+        bt_3: bt_3 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_3>, <&bt BT_DISC 3>;
+        };
+    };
+    macros {
+        bt_select_0: bt_select_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 0>;
+        };
+        bt_select_1: bt_select_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 1>;
+        };
+        bt_select_2: bt_select_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 2>;
+        };
+        bt_select_3: bt_select_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 3>;
+        };
+    };
+};
+
+
+/* #define for key positions */
+#define POS_LH_C1R1 4 /* Left hand column 1 (far index finger) row 1. */
+#define POS_LH_C2R1 3
+#define POS_LH_C3R1 2
+#define POS_LH_C4R1 1
+#define POS_LH_C5R1 0
+
+#define POS_LH_C1R2 14
+#define POS_LH_C2R2 13
+#define POS_LH_C3R2 12
+#define POS_LH_C4R2 11
+#define POS_LH_C5R2 10
+
+#define POS_LH_C1R3 24
+#define POS_LH_C2R3 23
+#define POS_LH_C3R3 22
+#define POS_LH_C4R3 21
+#define POS_LH_C5R3 20
+
+#define POS_LH_T1 30 /* Left hand inner most thumb key. */
+#define POS_LH_T2 31
+#define POS_LH_T3 32
+
+#define POS_RH_C1R1 5 /* Right hand column 1 ((far index finger) row 1. */
+#define POS_RH_C2R1 6
+#define POS_RH_C3R1 7
+#define POS_RH_C4R1 8
+#define POS_RH_C5R1 9
+
+#define POS_RH_C1R2 15
+#define POS_RH_C2R2 16
+#define POS_RH_C3R2 17
+#define POS_RH_C4R2 18
+#define POS_RH_C5R2 19
+
+#define POS_RH_C1R3 25
+#define POS_RH_C2R3 26
+#define POS_RH_C3R3 27
+#define POS_RH_C4R3 28
+#define POS_RH_C5R3 29
+
+#define POS_RH_T1 35 /* Right hand inner most thumb key. */
+#define POS_RH_T2 34
+#define POS_RH_T3 33
+
+
+/ {
+    macros {
+        // AutoShift Helper- &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro - TailorKey
+        AS_Shifted_v1_TKZ: AS_Shifted_v1_TKZ {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_press>
+                , <&kp LSHFT>
+                , <&macro_tap>
+                , <&macro_param_1to1>
+                , <&kp N1>
+                , <&macro_release>
+                , <&kp LSHFT>;
+        };
+
+        // AutoShift (Assign &AS to a Key) - &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro - TailorKey
+        AS_v1_TKZ: AS_v1_TKZ {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <10>;
+            wait-ms = <10>;
+            bindings = <&macro_press>
+                , <&macro_param_1to1>
+                , <&macro_param_1to2>
+                , <&AS_HT_v1_TKZ A A>
+                , <&macro_pause_for_release>
+                , <&macro_release>
+                , <&macro_param_1to1>
+                , <&macro_param_1to2>
+                , <&AS_HT_v1_TKZ A A>;
+        };
+    
+        // Cursor Layer - Copy (Ctrl C) - TailorKey
+        cur_COPY_v1_TKZ: cur_COPY_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C)>;
+        };
+    
+        // Cursor Layer - Cut (Ctrl X) - TailorKey
+        cur_CUT_v1_TKZ: cur_CUT_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(X)>;
+        };
+    
+        // Cursor Layer - Extent Line (seq) - TailorKey
+        cur_EXTEND_LINE_v1_TKZ: cur_EXTEND_LINE_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&kp LS(END)>;
+        };
+    
+        // Cursor Layer - Extend Word (seq) - TailorKey
+        cur_EXTEND_WORD_v1_TKZ: cur_EXTEND_WORD_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&kp LC(LS(RIGHT))>;
+        };
+    
+        // Cursor Layer - Find (Ctrl F) - TailorKey
+        cur_FIND_v1_TKZ: cur_FIND_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(F)>;
+        };
+    
+        // Cursor Layer - Find Next (Ctrl G) - TailorKey
+        cur_FNEXT_v1_TKZ: cur_FNEXT_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(G)>;
+        };
+    
+        // Cursor Layer - Find Prev (Ctrl Shift G) - TailorKey
+        cur_FPREV_v1_TKZ: cur_FPREV_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(LC(G))>;
+        };
+    
+        // Cursor Layer - Paste (Ctrl V) - TailorKey
+        cur_PASTE_v1_TKZ: cur_PASTE_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V)>;
+        };
+    
+        // Cursor Layer - Redo (Ctrl Y) - TailorKey
+        cur_REDO_v1_TKZ: cur_REDO_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Y)>;
+        };
+    
+        // Cursor Layer - Selest All (Ctrl A) - TailorKey
+        cur_SELECT_ALL_v1_TKZ: cur_SELECT_ALL_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(A)>;
+        };
+    
+        // Cursor Layer - Select Line (seq) - TailorKey
+        cur_SELECT_LINE_v1_TKZ: cur_SELECT_LINE_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&kp HOME>
+                , <&kp LS(END)>;
+        };
+    
+        // Cursor Layer - Select None (seq) - TailorKey
+        cur_SELECT_NONE_v1_TKZ: cur_SELECT_NONE_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&kp DOWN>
+                , <&kp UP>
+                , <&kp RIGHT>
+                , <&kp LEFT>;
+        };
+    
+        // Cursor Layer - Select Word (seq) - TailorKey
+        cur_SELECT_WORD_v1_TKZ: cur_SELECT_WORD_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&kp LC(LEFT)>
+                , <&kp LC(LS(RIGHT))>;
+        };
+    
+        cur_Shift_Insert: cur_Shift_Insert {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(INS)>;
+        };
+    
+        // Cursor Layer - Undo (Ctrl Z) - TailorKey
+        cur_UNDO_v1_TKZ: cur_UNDO_v1_TKZ {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Z)>;
+        };
+    
+        // mod_tab_switcher_chord -  TailorKey
+        mod_tab_chord_v1_TKZ: mod_tab_chord_v1_TKZ {
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_press>
+                , <&macro_param_2to1>
+                , <&mo 0>
+                , <&macro_press>
+                , <&macro_param_1to1>
+                , <&mod_tab_v1_TKZ N0>
+                , <&macro_pause_for_release>
+                , <&macro_release>
+                , <&macro_param_1to1>
+                , <&mod_tab_v1_TKZ N0>
+                , <&macro_release>
+                , <&macro_param_2to1>
+                , <&mo 0>;
+        };
+
+        // mod_tab_switcher - TailorKey
+        mod_tab_v1_TKZ: mod_tab_v1_TKZ {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_press>
+                , <&macro_param_1to1>
+                , <&kp N0>
+                , <&macro_tap>
+                , <&kp TAB>
+                , <&macro_pause_for_release>
+                , <&macro_release>
+                , <&macro_param_1to1>
+                , <&kp N0>;
+        };
+    
+        tmux_prefix: tmux_prefix {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <30>;
+            bindings = <&kp GRAVE>
+                , <&macro_param_1to1>
+                , <&kp A>;
+        };
+
+        // Go to top
+        cur_ctrl_home: cur_ctrl_home {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(HOME)>;
+        };
+
+        // Go to bottom
+        cur_ctrl_end: cur_ctrl_end {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(END)>;
+        };
+    };
+};
+
+/ {
+    behaviors {
+        shiftdance: shiftdance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            // for normal shift, use the following:
+            // bindings = <&kp RSHIFT>, <&caps_word>, <&kp CAPSLOCK>;
+            bindings = <&sk LSHIFT>, <&caps_word>, <&kp CAPSLOCK>;
+        };
+
+        // AutoShift Helper - &AS main macro is chained to &AS_HT hold tap and &AS_Shifted macro - TailorKey
+        AS_HT_v1_TKZ: AS_HT_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <190>;
+            bindings = <&AS_Shifted_v1_TKZ>, <&kp>;
+        };
+
+        // Homerow Mod for the left index finger - TailorKey
+        HRM_left_index_v1_TKZ: HRM_left_index_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <170>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <100>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the left middle finger - TailorKey
+        HRM_left_middy_v1_TKZ: HRM_left_middy_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <210>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the left pinky - TailorKey
+        HRM_left_pinky_v1_TKZ: HRM_left_pinky_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <260>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the left ring finger 1 - TailorKey
+        HRM_left_ring1_v1_TKZ: HRM_left_ring1_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <240>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the right index finger - TailorKey
+        HRM_right_index_v1_TKZ: HRM_right_index_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <170>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <100>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the right middle finger - TailorKey
+        HRM_right_middy_v1_TKZ: HRM_right_middy_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <210>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the right pinky - TailorKey
+        HRM_right_pinky_v1_TKZ: HRM_right_pinky_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <260>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
+        // Homerow Mod for the right ring 1 - TailorKey
+        // 
+        HRM_right_ring1_v1_TKZ: HRM_right_ring1_v1_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <240>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
+        // space_layer_access - TailorKey
+        space_v2_TKZ: space_v2_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            flavor = "balanced";
+            quick-tap-ms = <150>;
+            retro-tap;
+        };
+
+        // thumb_layer_access - TailorKey
+        thumb_v2_TKZ: thumb_v2_TKZ {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            flavor = "balanced";
+            quick-tap-ms = <300>;
+        };
+    };
+};
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_alt_tab_switch_thumb {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_T1 POS_LH_T2>;
+            bindings = <&mod_tab_chord_v1_TKZ LALT LAYER_AltTab>;
+        };
+        combo_alt_tab_switch_index {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_C1R2 POS_LH_C2R2>;
+            bindings = <&mod_tab_chord_v1_TKZ LALT LAYER_AltTab>;
+        };
+
+        // Calls macro tab_switcher_ctrl_combo on Left T4/T5 - TailorKey
+        combo_ctrl_tab_switch_thumb {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_T2 POS_LH_T3>;
+            bindings = <&mod_tab_chord_v1_TKZ LCTRL LAYER_CtrlTab>;
+        };
+
+        // Calls macro tab_switcher_ctrl_combo on Left T4/T5 - TailorKey
+        combo_ctrl_tab_switch_index {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_C1R1 POS_LH_C2R1>;
+            bindings = <&mod_tab_chord_v1_TKZ LCTRL LAYER_CtrlTab>;
+        };
+
+        // sticky "meh" modifiers (Alt + Ctrl + Shift) - TailorKey
+        // combo_sticky_meh_rght_v1_TKZ {
+        //     timeout-ms = <50>;
+        //     key-positions = <73 74>;
+        //     bindings = <&sk LA(LC(LSHFT))>;
+        // };
+
+        // sticky "hyper" modifiers (Win + Alt + Ctrl + Shift) - TailorKey
+        // combo_sticky_hyp_rght_v1_TKZ {
+        //     timeout-ms = <50>;
+        //     key-positions = <74 57>;
+        //     bindings = <&sk LG(LA(LC(LSHFT)))>;
+        // };
+
+        combo_esc_by_as {
+            key-positions = <POS_LH_C2R3 POS_LH_C3R3>;
+            bindings = <&kp ESC>;
+        };
+
+        combo_capsword_right {
+            timeout-ms = <50>;
+            key-positions = <POS_RH_T2 POS_RH_C1R2>;
+            bindings = <&caps_word>;
+        };
+
+        combo_magic {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_T3 POS_LH_C1R1>;
+            bindings = <&to LAYER_Magic>;
+        };
+
+        combo_unlock {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_T1 POS_LH_T2 POS_LH_T3>;
+            layers = <0>;
+            bindings = <&studio_unlock>;
+        };
+    };
+};
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        layer_Base {
+            display-name = "base";
+            bindings = <
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P
+                &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G     &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI
+                &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                                    &thumb_v2_TKZ LAYER_Cursor BSPC &thumb_v2_TKZ LAYER_Number TAB &kp LSHFT    &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_Lower {
+            display-name = "Lower";
+            bindings = <
+                &none     &kp F7    &kp F8    &kp F9    &kp INS   &none     &none     &none     &none     &none
+                &kp ESC   &kp F4    &kp F5    &kp F6    &kp DEL   &none     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI
+                &none     &kp F1    &kp F2    &kp F3    &none     &none     &none     &none     &none     &none
+                                    &kp F10   &kp F11   &kp F12   &none     &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp UP DOWN>;
+        };
+
+        layer_Magic {
+            display-name = "Magic";
+            bindings = <
+                &to 0       &to 1     &to 2     &to 3     &to 4            &to 5       &to 6     &none     &none     &none
+                &bootloader &none     &none     &none     &bt BT_CLR       &bt BT_CLR  &none     &none     &none     &bootloader
+                &sys_reset  &none     &none     &bt_2     &bt_3            &none       &none     &none     &none     &sys_reset
+                                      &bt_0     &bt_1     &out OUT_USB     &none       &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        layer_Cursor {
+            display-name = "Cursor";
+            bindings = <
+                &none     &none     &none     &none     &cur_CUT_v1_TKZ       &none             &none     &none     &none     &none
+                &none     &none     &none     &none     &cur_COPY_v1_TKZ      &kp LEFT          &kp DOWN  &kp UP    &kp RIGHT &none
+                &none     &none     &none     &none     &cur_PASTE_v1_TKZ     &cur_Shift_Insert &kp PG_DN &kp PG_UP &kp HOME  &kp END
+                                    &none     &none     &none                 &none             &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_Symbol {
+            display-name = "Symbol";
+            bindings = <
+                &kp GRAVE &kp TILDE &kp PLUS   &kp RBRC &kp AT       &kp AMPS &kp LBKT  &kp RBKT  &kp TILDE  &kp GRAVE
+                &kp CARET &kp EQUAL &kp UNDER  &kp DLLR &kp EXCL     &kp HASH &kp LPAR  &kp RPAR  &kp DQT    &kp SQT
+                &kp LT    &kp PIPE  &kp MINUS  &kp GT   &kp AMPS     &kp STAR &kp LBRC  &kp RBRC  &kp AT     &kp BSLH
+                                    &kp PRCNT &kp COLON &kp SEMI     &to 0    &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp PG_DN PG_UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_Number {
+            display-name = "Number";
+            bindings = <
+                &none     &none     &none     &none     &none     &kp LS(G)         &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp LS(SEMI)
+                &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &none     &kp KP_PLUS       &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp KP_MINUS
+                &none     &none     &none     &none     &none     &kp KP_MULTIPLY   &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_SLASH
+                                    &none     &none     &none     &none             &kp DOT    &kp KP_N0
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_Tmux {
+            display-name = "Tmux";
+            bindings = <
+                &none             &none               &none           &none                 &none              &none           &tmux_prefix KP_N7  &tmux_prefix KP_N8  &tmux_prefix KP_N9  &tmux_prefix P
+                &tmux_prefix ESC  &tmux_prefix S      &tmux_prefix D  &tmux_prefix O        &tmux_prefix K     &none           &tmux_prefix KP_N4  &tmux_prefix KP_N5  &tmux_prefix KP_N6  &tmux_prefix SEMI
+                &tmux_prefix Z    &tmux_prefix UNDER  &tmux_prefix C  &tmux_prefix LS(BSLH) &none              &tmux_prefix N  &tmux_prefix KP_N1  &tmux_prefix KP_N2  &tmux_prefix KP_N3  &none
+                                                      &none               &none             &none              &none           &none               &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_AltTab {
+            display-name = "AltTab";
+            bindings = <
+                &none     &none     &none     &none     &none       &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none
+                &none     &none     &none     &none     &none       &none     &none     &none     &none     &none       
+                                    &none     &none     &none       &none     &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+        };
+
+        layer_CtrlTab {
+            display-name = "CtrlTab";
+            bindings = <
+                &none     &none     &none     &none     &none       &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none
+                &none     &none     &none     &none     &none       &none     &none     &none     &none     &none       
+                                    &none     &none     &none       &none     &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp UP DOWN>;
+        };
+    };
+};
