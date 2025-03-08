@@ -7,6 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/ext_power.h>
 /* For selecting output, e.g. BLE, USB */
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
@@ -641,10 +642,10 @@
         layer_Magic {
             display-name = "Magic";
             bindings = <
-                &to 0       &to 1     &to 2     &to 3     &to 4            &to 5       &to 6     &to 7     &to 8     &to 9
-                &bootloader &none     &none     &none     &bt BT_CLR       &bt BT_CLR  &none     &none     &none     &bootloader
-                &sys_reset  &none     &none     &bt_2     &bt_3            &none       &none     &none     &none     &sys_reset
-                                      &bt_0     &bt_1     &out OUT_USB     &none       &none     &none
+                &to 0       &to 1             &to 2     &to 3     &to 4            &to 5       &to 6     &to 7     &to 8     &to 9
+                &bootloader &none             &none     &none     &bt BT_CLR       &bt BT_CLR  &none     &none     &none     &bootloader
+                &sys_reset  &ext_power EP_OFF &none     &bt_2     &bt_3            &none       &none     &none     &none     &sys_reset
+                                              &bt_0     &bt_1     &out OUT_USB     &none       &none     &none
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_UP PG_DN>;
