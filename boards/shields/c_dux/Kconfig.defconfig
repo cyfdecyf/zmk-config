@@ -1,3 +1,10 @@
+if SHIELD_C_DUX_LEFT || SHIELD_C_DUX_RIGHT
+
+config ZMK_SPLIT
+	default y
+
+endif
+
 if SHIELD_C_DUX_LEFT
 
 config ZMK_KEYBOARD_NAME
@@ -6,11 +13,11 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_BLE_ROLE_CENTRAL
 	default y
 
-endif
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY
+	default y
 
-if SHIELD_C_DUX_LEFT || SHIELD_C_DUX_RIGHT
-
-config ZMK_SPLIT
+config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
 	default y
 
 endif
+
