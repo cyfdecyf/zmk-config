@@ -547,6 +547,66 @@
     combos {
         compatible = "zmk,combos";
 
+        combo_n1 {
+            key-positions = <POS_LH_C5R1 POS_LH_C5R2>;
+            bindings = <&kp N1>;
+        };
+        combo_n2 {
+            key-positions = <POS_LH_C4R1 POS_LH_C4R2>;
+            bindings = <&kp N2>;
+        };
+        combo_n3 {
+            key-positions = <POS_LH_C3R1 POS_LH_C3R2>;
+            bindings = <&kp N3>;
+        };
+        combo_n4 {
+            key-positions = <POS_LH_C2R1 POS_LH_C2R2>;
+            bindings = <&kp N4>;
+        };
+        combo_n5 {
+            key-positions = <POS_LH_C1R1 POS_LH_C1R2>;
+            bindings = <&kp N5>;
+        };
+        combo_n6 {
+            key-positions = <POS_RH_C1R1 POS_RH_C1R2>;
+            bindings = <&kp N6>;
+        };
+        combo_n7 {
+            key-positions = <POS_RH_C2R1 POS_RH_C2R2>;
+            bindings = <&kp N7>;
+        };
+        combo_n8 {
+            key-positions = <POS_RH_C3R1 POS_RH_C3R2>;
+            bindings = <&kp N8>;
+        };
+        combo_n9 {
+            key-positions = <POS_RH_C4R1 POS_RH_C4R2>;
+            bindings = <&kp N9>;
+        };
+        combo_n0 {
+            key-positions = <POS_RH_C5R1 POS_RH_C5R2>;
+            bindings = <&kp N0>;
+        };
+
+        combo_single_quote {
+            key-positions = <POS_RH_C2R2 POS_RH_C2R3>;
+            bindings = <&kp SQT>;
+        };
+        combo_double_quote {
+            key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
+            bindings = <&kp DQT>;
+        };
+
+        // dash and under score combo is on left hand.
+        combo_dash {
+            key-positions = <POS_LH_C3R2 POS_LH_C3R3>;
+            bindings = <&kp MINUS>;
+        };
+        combo_underscore {
+            key-positions = <POS_LH_C4R2 POS_LH_C4R3>;
+            bindings = <&kp UNDER>;
+        };
+
         combo_alt_tab_switch_thumb {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_LH_T2>;
@@ -572,6 +632,17 @@
             bindings = <&mod_tab_chord_v1_TKZ LCTRL LAYER_CtrlTab>;
         };
 
+        combo_esc_by_fv {
+            key-positions = <POS_LH_C2R2 POS_LH_C2R3>;
+            bindings = <&kp ESC>;
+        };
+
+        combo_capsword_right {
+            timeout-ms = <50>;
+            key-positions = <POS_RH_T2 POS_RH_C1R2>;
+            bindings = <&caps_word>;
+        };
+
         // sticky "meh" modifiers (Alt + Ctrl + Shift) - TailorKey
         // combo_sticky_meh_rght_v1_TKZ {
         //     timeout-ms = <50>;
@@ -585,17 +656,6 @@
         //     key-positions = <74 57>;
         //     bindings = <&sk LG(LA(LC(LSHFT)))>;
         // };
-
-        combo_esc_by_as {
-            key-positions = <POS_LH_C2R3 POS_LH_C3R3>;
-            bindings = <&kp ESC>;
-        };
-
-        combo_capsword_right {
-            timeout-ms = <50>;
-            key-positions = <POS_RH_T2 POS_RH_C1R2>;
-            bindings = <&caps_word>;
-        };
 
         combo_magic_left {
             timeout-ms = <50>;
@@ -637,9 +697,9 @@
         layer_Lower {
             display-name = "Lower";
             bindings = <
-                &kp KP_NUM &none     &none     &none     &kp INS     &none     &kp F7    &kp F8    &kp F9  &none
-                &kp LGUI   &kp LALT  &kp LCTRL &kp LSHFT &kp DEL     &kp DEL   &kp F4    &kp F5    &kp F6  &none
-                &none      &none     &none     &none     &none       &none     &kp F1    &kp F2    &kp F3  &none
+                &kp KP_NUM &none     &none     &none     &kp INS     &kp F12   &kp F7    &kp F8    &kp F9  &none
+                &kp LGUI   &kp LALT  &kp LCTRL &kp LSHFT &kp DEL     &kp F11   &kp F4    &kp F5    &kp F6  &none
+                &none      &none     &none     &none     &none       &kp F10   &kp F1    &kp F2    &kp F3  &none
                                      &none     &none     &none       &none     &none     &none
             >;
 
@@ -662,7 +722,7 @@
             display-name = "Cursor";
             bindings = <
                 &none     &none     &none     &none     &cur_CUT_v1_TKZ       &none             &none     &none     &none     &none
-                &none     &none     &none     &none     &cur_COPY_v1_TKZ      &kp LEFT          &kp DOWN  &kp UP    &kp RIGHT &none
+                &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_COPY_v1_TKZ      &kp LEFT          &kp DOWN  &kp UP    &kp RIGHT &none
                 &none     &none     &none     &none     &cur_PASTE_v1_TKZ     &cur_Shift_Insert &kp PG_DN &kp PG_UP &kp HOME  &kp END
                                     &none     &none     &none                 &none             &none     &none
             >;
@@ -687,8 +747,8 @@
             bindings = <
                 &none     &none     &none     &none     &none     &kp LS(G)         &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
                 &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC  &kp KP_PLUS       &kp N4  &kp N5  &kp N6  &kp KP_MINUS
-                &none     &none     &kp COMMA &kp SPACE &none     &kp KP_MULTIPLY   &kp N1  &kp N2  &kp N3  &kp KP_SLASH
-                                    &none     &none     &none     &kp EQUAL         &kp DOT &kp N0
+                &none     &kp EQUAL &kp UNDER &kp SPACE &kp DEL   &kp KP_MULTIPLY   &kp N1  &kp N2  &kp N3  &kp KP_SLASH
+                                    &none     &none     &none     &kp COMMA         &kp DOT &kp N0
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
