@@ -1,4 +1,4 @@
-if SHIELD_C_DUX_LEFT || SHIELD_C_DUX_RIGHT
+if SHIELD_C_DUX
 
 config ZMK_SPLIT
 	default y
@@ -10,6 +10,18 @@ if SHIELD_C_DUX_LEFT
 config ZMK_KEYBOARD_NAME
 	default "C. Dux"
 
+endif
+
+if SHIELD_C_DUX_REV2_LEFT
+
+config ZMK_KEYBOARD_NAME
+	default "C. Dux v2"
+
+endif
+
+
+if SHIELD_C_DUX_LEFT || SHIELD_C_DUX_REV2_LEFT
+
 config ZMK_SPLIT_BLE_ROLE_CENTRAL
 	default y
 
@@ -20,4 +32,3 @@ config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
 	default y
 
 endif
-

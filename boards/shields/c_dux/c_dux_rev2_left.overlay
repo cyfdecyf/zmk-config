@@ -1,0 +1,5 @@
+#include "c_dux_rev2.dtsi"
+
+&left_encoder {
+    status = "okay";
+};

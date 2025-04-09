@@ -1,5 +1,18 @@
+config SHIELD_C_DUX
+    bool
+
 config SHIELD_C_DUX_LEFT
 	def_bool $(shields_list_contains,c_dux_left)
+    select SHIELD_C_DUX
 
 config SHIELD_C_DUX_RIGHT
 	def_bool $(shields_list_contains,c_dux_right)
+    select SHIELD_C_DUX
+
+config SHIELD_C_DUX_REV2_LEFT
+    def_bool $(shields_list_contains,c_dux_rev2_left)
+    select SHIELD_C_DUX
+
+config SHIELD_C_DUX_REV2_RIGHT
+    def_bool $(shields_list_contains,c_dux_rev2_right)
+    select SHIELD_C_DUX
