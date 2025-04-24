@@ -6,9 +6,15 @@
 # set -x
 set -e
 
-# Check if ZMK_DIR is set
-if [ -z "$ZMK_DIR" ]; then
-    echo "Please set ZMK_DIR to the source directory of ZMK firmware."
+## Check if ZMK_DIR is set
+if [[ -z "${ZMK_DIR}" ]]; then
+    echo "WARNING: ZMK_DIR not set, using '../zmk'"
+fi
+
+ZMK_DIR=${ZMK_DIR:-../zmk}
+
+if [[ ! -d ${ZMK_DIR} ]]; then
+    echo "ERROR: ZMK_DIR ${ZMK_DIR} does not exist"
     exit 1
 fi
 

@@ -13,6 +13,7 @@ Setup local toolchain as specified in [ZMK docs](https://zmk.dev/docs/developmen
 Run following commands to build firmware:
 
 ```bash
+# ZMK_DIR defaults to '../zmk' if not set.
 export ZMK_DIR=<path to zmk firmware>
 ./build.sh
 ```
