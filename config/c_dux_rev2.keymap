@@ -662,8 +662,22 @@
         combo_unlock {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_LH_T2 POS_LH_T3>;
-            layers = <0>;
+            layers = <LAYER_Base>;
             bindings = <&studio_unlock>;
+        };
+
+        combo_bt_clr_lh {
+            timeout-ms = <50>;
+            key-positions = <POS_LH_T1 POS_LH_C6R2>;
+            layers = <LAYER_Magic>;
+            bindings = <&bt BT_CLR>;
+        };
+
+        combo_bt_clr_rh {
+            timeout-ms = <50>;
+            key-positions = <POS_RH_T1 POS_RH_C6R2>;
+            layers = <LAYER_Magic>;
+            bindings = <&bt BT_CLR>;
         };
     };
 };
@@ -700,7 +714,7 @@
             display-name = "Magic";
             bindings = <
                 &to 0       &to 1             &to 2     &to 3       &to 4            &to 5       &to 6        &to 7     &to 8     &to 9
-     &bt BT_CLR &none       &none             &none     &bootloader &none            &none       &bootloader  &none     &none     &none  &bt BT_CLR
+          &none &none       &none             &none     &bootloader &none            &none       &bootloader  &none     &none     &none      &none
                 &sys_reset  &ext_power EP_OFF &none     &bt_2       &bt_3            &none       &none        &none     &none     &sys_reset
                                               &bt_0     &bt_1       &out OUT_USB     &none       &none        &none
             >;
