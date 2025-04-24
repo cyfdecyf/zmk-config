@@ -395,6 +395,16 @@
             #binding-cells = <0>;
             bindings = <&kp LC(END)>;
         };
+
+        lgui_space: lgui_space {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <1>;
+            wait-ms = <1>;
+            bindings = <&macro_press &kp LGUI>
+                , <&macro_tap &kp SPACE>
+                , <&macro_release &kp LGUI>;
+        };
     };
 };
 
@@ -591,9 +601,9 @@
         };
 
         // left index finger
-        combo_esc_by_fv {
+        combo_underscore {
             key-positions = <POS_LH_C2R2 POS_LH_C2R3>;
-            bindings = <&kp ESC>;
+            bindings = <&kp UNDER>;
         };
         // left midddle finger
         combo_dash {
@@ -602,14 +612,13 @@
         };
         // right index finger
         combo_capsword_right {
-            timeout-ms = <50>;
             key-positions = <POS_RH_C2R2 POS_RH_C2R3>;
             bindings = <&caps_word>;
         };
         // right finger
-        combo_underscore {
+        combo_lgui_space{
             key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
-            bindings = <&kp UNDER>;
+            bindings = <&lgui_space>;
         };
 
         combo_alt_tab_switch_thumb {
@@ -714,9 +723,9 @@
         layer_Symbol {
             display-name = "Symbol";
             bindings = <
-                &kp GRAVE &kp TILDE &kp PLUS   &kp RBRC &kp AT       &kp AMPS &kp LBKT  &kp RBKT  &kp TILDE  &kp GRAVE
-        &kp ESC &kp CARET &kp EQUAL &kp UNDER  &kp DLLR &kp EXCL     &kp HASH &kp LPAR  &kp RPAR  &kp DQT    &kp SQT    &kp SQT
-                &kp LT    &kp PIPE  &kp MINUS  &kp GT   &kp AMPS     &kp STAR &kp LBRC  &kp RBRC  &kp AT     &kp BSLH
+                &kp GRAVE &kp TILDE &kp PLUS   &kp RBRC &kp AT       &kp HASH &kp LBKT  &kp RBKT  &kp TILDE  &kp COLON
+        &kp ESC &kp CARET &kp EQUAL &kp UNDER  &kp DLLR &kp EXCL     &kp STAR &kp LPAR  &kp RPAR  &kp GRAVE  &kp BSLH  &kp SQT
+                &kp LT    &kp PIPE  &kp MINUS  &kp GT   &kp AMPS     &kp AMPS &kp LBRC  &kp RBRC  &kp AT     &kp PRCNT
                                     &kp PRCNT &kp COLON &kp SEMI     &to 0    &none     &none
             >;
 
@@ -727,9 +736,9 @@
             display-name = "Number";
             bindings = <
                 &none     &none     &none     &none     &none     &kp LS(G)         &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
-        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC  &kp KP_PLUS       &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
-                &none     &kp EQUAL &kp UNDER &kp SPACE &kp DEL   &kp KP_MULTIPLY   &kp N1  &kp N2  &kp N3  &kp KP_SLASH
-                                    &none     &none     &none     &kp COMMA         &kp DOT &kp N0
+        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC  &kp KP_MULTIPLY   &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp KP_PLUS
+                &none     &kp EQUAL &kp UNDER &kp SPACE &kp DEL   &kp COMMA         &kp N1  &kp N2  &kp N3  &kp KP_SLASH
+                                    &none     &none     &none     &kp EQUAL         &kp DOT &kp N0
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
