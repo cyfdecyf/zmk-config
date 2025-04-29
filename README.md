@@ -19,3 +19,8 @@ export ZMK_DIR=<path to zmk firmware>
 ```
 
 By default, firmware will be copied to `firmware` directory.
+
+# Reference
+
+- [ProMicro NRF52840 Pinout](https://www.nologo.tech/product/otherboard/NRF52840.html#%E5%BC%95%E8%84%9A%E5%9B%BE)
+  - This is the same as [nice!nano's pinout](https://nicekeyboards.com/docs/nice-nano/pinout-schematic/).
