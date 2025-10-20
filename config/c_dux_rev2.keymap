@@ -12,8 +12,8 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define LAYER_Base 0
-#define LAYER_MacOS 1
+#define LAYER_Mac 0
+#define LAYER_PC 1
 #define LAYER_Lower 2
 #define LAYER_Magic 3
 #define LAYER_Cursor 4
@@ -629,38 +629,38 @@
         // right middle finger
         combo_lgui_space {
             key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
-            layers = <LAYER_Base>;
+            layers = <LAYER_PC>;
             bindings = <&lgui_space>;
         };
         combo_lgui_space_macos {
             key-positions = <POS_RH_T1 POS_RH_T2>;
-            layers = <LAYER_MacOS>;
+            layers = <LAYER_Mac>;
             bindings = <&lgui_space>;
         };
         combo_lctrl_space {
             key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
-            layers = <LAYER_MacOS>;
+            layers = <LAYER_Mac>;
             bindings = <&lctrl_space>;
         };
 
         combo_alt_tab_switch_thumb {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_LH_T2>;
-            layers = <LAYER_Base>;
+            layers = <LAYER_PC>;
             bindings = <&mod_tab_chord_v1_TKZ LALT LAYER_AltTab>;
         };
 
         combo_cmd_tab_switch_thumb {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_LH_T2>;
-            layers = <LAYER_MacOS>;
+            layers = <LAYER_Mac>;
             bindings = <&mod_tab_chord_v1_TKZ LCMD LAYER_CtrlTab>;
         };
 
         combo_ctrl_tab_switch_thumb {
             timeout-ms = <50>;
             key-positions = <POS_LH_T2 POS_LH_T3>;
-            layers = <LAYER_Base LAYER_MacOS>;
+            layers = <LAYER_PC LAYER_Mac>;
             bindings = <&mod_tab_chord_v1_TKZ LCTRL LAYER_CtrlTab>;
         };
 
@@ -693,7 +693,7 @@
         combo_unlock {
             timeout-ms = <50>;
             key-positions = <POS_LH_T1 POS_LH_T2 POS_LH_T3>;
-            layers = <LAYER_Base LAYER_MacOS>;
+            layers = <LAYER_PC LAYER_Mac>;
             bindings = <&studio_unlock>;
         };
 
@@ -717,26 +717,26 @@
     keymap {
         compatible = "zmk,keymap";
 
-        layer_Base {
-            /* RH use left shift so that we can single click shift to switch to
-            * English in Chinese input method. */
-            display-name = "base";
+        layer_Mac {
+            display-name = "Mac";
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                 &kp U     &kp I     &kp O     &kp P
-        &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G     &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
-                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                           &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
+        &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCMD D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCMD K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI  &kp SQT
+                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
                                     &thumb_v2_TKZ LAYER_Cursor BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
         };
 
-        layer_MacOS {
-            display-name = "base";
+        layer_PC {
+            /* RH use left shift so that we can single click shift to switch to
+            * English in Chinese input method. */
+            display-name = "PC";
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
-        &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCMD D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCMD K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI  &kp SQT
-                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                 &kp U     &kp I     &kp O     &kp P
+        &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G     &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
+                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                           &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
                                     &thumb_v2_TKZ LAYER_Cursor BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
