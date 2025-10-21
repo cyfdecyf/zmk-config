@@ -16,13 +16,14 @@
 #define LAYER_PC 1
 #define LAYER_Lower 2
 #define LAYER_Magic 3
-#define LAYER_Cursor 4
-#define LAYER_Symbol 5
-#define LAYER_Number 6
-#define LAYER_Tmux 7
-#define LAYER_Shortcut 8
-#define LAYER_AltTab 9
-#define LAYER_CtrlTab 10
+#define LAYER_CursorPC 4
+#define LAYER_CursorMac 5
+#define LAYER_Symbol 6
+#define LAYER_Number 7
+#define LAYER_Tmux 8
+#define LAYER_Shortcut 9
+#define LAYER_AltTab 10
+#define LAYER_CtrlTab 11
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -230,12 +231,22 @@
             #binding-cells = <0>;
             bindings = <&kp LC(C)>;
         };
+        cur_COPY_Mac: cur_COPY_Mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(C)>;
+        };
 
         // Cursor Layer - Cut (Ctrl X) - TailorKey
         cur_CUT_v1_TKZ: cur_CUT_v1_TKZ {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LC(X)>;
+        };
+        cur_CUT_Mac: cur_CUT_Mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(X)>;
         };
 
         // Cursor Layer - Extent Line (seq) - TailorKey
@@ -275,6 +286,11 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LC(V)>;
+        };
+        cur_PASTE_Mac: cur_PASTE_Mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(V)>;
         };
 
         // Cursor Layer - Redo (Ctrl Y) - TailorKey
@@ -723,7 +739,7 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
         &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCMD D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCMD K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI  &kp SQT
                 &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_Cursor BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                                    &thumb_v2_TKZ LAYER_CursorMac BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -737,7 +753,7 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                 &kp U     &kp I     &kp O     &kp P
         &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G     &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
                 &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                           &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_Cursor BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -767,12 +783,24 @@
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
         };
 
-        layer_Cursor {
-            display-name = "Cursor";
+        layer_CursorPC {
+            display-name = "CursorPC";
             bindings = <
                 &none     &none     &none     &none     &cur_CUT_v1_TKZ       &none             &none     &none     &none     &none
         &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_COPY_v1_TKZ      &kp LEFT          &kp DOWN  &kp UP    &kp RIGHT &none   &kp SQT
                 &none     &none     &none     &none     &cur_PASTE_v1_TKZ     &cur_Shift_Insert &kp PG_DN &kp PG_UP &kp HOME  &kp END
+                                    &none     &none     &none                 &none             &none     &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_DN PG_UP>;
+        };
+
+        layer_CursorMac {
+            display-name = "CursorMac";
+            bindings = <
+                &none     &none     &none     &none     &cur_CUT_Mac          &none             &none     &none     &none     &none
+        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_COPY_Mac         &kp LEFT          &kp DOWN  &kp UP    &kp RIGHT &none   &kp SQT
+                &none     &none     &none     &none     &cur_PASTE_Mac        &cur_PASTE_Mac    &kp PG_DN &kp PG_UP &kp HOME  &kp END
                                     &none     &none     &none                 &none             &none     &none
             >;
 
@@ -816,7 +844,7 @@
         };
 
         layer_Shortcut {
-            display-name = "AltTab";
+            display-name = "Shortcut";
             bindings = <
                 &none     &none     &none     &none     &none       &kp LA(GRAVE) &kp LA(N7)  &kp LA(N8) &kp LA(N9)    &none
         &none   &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &none       &none         &kp LA(N4)  &kp LA(N5) &kp LC(GRAVE) &none &none
