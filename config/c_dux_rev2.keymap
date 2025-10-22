@@ -21,9 +21,10 @@
 #define LAYER_Symbol 6
 #define LAYER_Number 7
 #define LAYER_Tmux 8
-#define LAYER_Shortcut 9
-#define LAYER_AltTab 10
-#define LAYER_CtrlTab 11
+#define LAYER_ShortcutPC 9
+#define LAYER_ShortcutMac 10
+#define LAYER_AltTab 11
+#define LAYER_CtrlTab 12
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -740,7 +741,7 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
         &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCMD D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCMD K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI  &kp SQT
                 &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_CursorMac BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                                    &thumb_v2_TKZ LAYER_CursorMac BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_ShortcutMac LSHFT               &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -751,10 +752,10 @@
             * English in Chinese input method. */
             display-name = "PC";
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                 &kp U     &kp I     &kp O     &kp P
-        &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G     &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
-                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                           &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_Shortcut LSHFT                     &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                    &kp U     &kp I     &kp O     &kp P
+        &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
+                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                              &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_ShortcutPC LSHFT                  &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -844,13 +845,25 @@
             sensor-bindings = <&rotate_alt_tab_shifttab &inc_dec_kp DOWN UP>;
         };
 
-        layer_Shortcut {
-            display-name = "Shortcut";
+        layer_ShortcutPC {
+            display-name = "ShortcutPC";
             bindings = <
                 &none     &none     &none     &none     &none       &kp LA(GRAVE) &kp LA(N7)  &kp LA(N8) &kp LA(N9)    &none
         &none   &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &none       &none         &kp LA(N4)  &kp LA(N5) &kp LC(GRAVE) &none &none
                 &none     &none     &none     &none     &none       &none         &kp LA(N1)  &kp LA(N2) &kp LA(N3)    &none
                                     &none     &none     &none       &kp LC(F6)    &kp LS(F6)  &kp LA(N0)
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &scroll_up_down>;
+        };
+
+        layer_ShortcutMAC {
+            display-name = "ShortcutMac";
+            bindings = <
+                &none     &none     &none     &none     &none       &kp LG(GRAVE) &kp LG(N7)  &kp LG(N8) &kp LG(N9)    &none
+        &none   &kp LCTRL &kp LALT  &kp LCMD  &kp LSHFT &none       &none         &kp LG(N4)  &kp LG(N5) &kp LC(GRAVE) &none &none
+                &none     &none     &none     &none     &none       &none         &kp LG(N1)  &kp LG(N2) &kp LG(N3)    &none
+                                    &none     &none     &none       &kp LG(F6)    &kp LS(F6)  &kp LG(N0)
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &scroll_up_down>;
