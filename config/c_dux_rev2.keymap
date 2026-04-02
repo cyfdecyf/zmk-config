@@ -19,12 +19,13 @@
 #define LAYER_CursorPC 4
 #define LAYER_CursorMac 5
 #define LAYER_Symbol 6
-#define LAYER_Number 7
-#define LAYER_Tmux 8
-#define LAYER_ShortcutPC 9
-#define LAYER_ShortcutMac 10
-#define LAYER_AltTab 11
-#define LAYER_CtrlTab 12
+#define LAYER_NumberPC 7
+#define LAYER_NumberMac 8
+#define LAYER_Tmux 9
+#define LAYER_ShortcutPC 10
+#define LAYER_ShortcutMac 11
+#define LAYER_AltTab 12
+#define LAYER_CtrlTab 13
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -338,6 +339,12 @@
             wait-ms = <1>;
             bindings = <&kp LC(LEFT)>
                 , <&kp LC(LS(RIGHT))>;
+        };
+
+        cur_Ctrl_Insert: cur_Ctrl_Insert {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(INS)>;
         };
 
         cur_Shift_Insert: cur_Shift_Insert {
@@ -748,7 +755,7 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
         &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCMD D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCMD K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LCTRL SEMI  &kp SQT
                 &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_CursorMac BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_ShortcutMac LSHFT               &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                                    &thumb_v2_TKZ LAYER_CursorMac BSPC &thumb_v2_TKZ LAYER_NumberMac TAB &thumb_v2_TKZ LAYER_ShortcutMac LSHFT            &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -762,7 +769,7 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                    &kp U     &kp I     &kp O     &kp P
         &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
                 &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                              &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_Number TAB &thumb_v2_TKZ LAYER_ShortcutPC LSHFT                  &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_NumberPC TAB &thumb_v2_TKZ LAYER_ShortcutPC LSHFT                &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
@@ -792,25 +799,25 @@
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
         };
 
-        layer_CursorPC {
-            display-name = "CursorPC";
+        layer_CursorMac {
+            display-name = "CursorMac";
             bindings = <
-                &none     &none     &none     &none     &cur_CUT_v1_TKZ       &none             &kp HOME  &kp LC(UP) &kp LC(DOWN) &kp END
-        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_COPY_v1_TKZ      &kp LEFT          &kp DOWN  &kp UP     &kp RIGHT    &none   &kp SQT
-                &none     &none     &none     &none     &cur_PASTE_v1_TKZ     &cur_Shift_Insert &kp PG_DN &kp PG_UP  &kp HOME     &kp END
-                                    &none     &none     &none                 &none             &none     &none
+                &none     &none     &none     &none     &cur_CUT_Mac          &none             &kp LG(LEFT) &kp LG(UP) &kp LG(DOWN) &kp LG(RIGHT)
+        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_Ctrl_Insert      &kp LEFT          &kp DOWN     &kp UP     &kp RIGHT    &none   &kp SQT
+                &none     &none     &none     &none     &cur_Shift_Insert     &cur_PASTE_Mac    &kp PG_DN    &kp PG_UP  &kp HOME     &kp END
+                                    &none     &none     &none                 &none             &none        &none
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_DN PG_UP>;
         };
 
-        layer_CursorMac {
-            display-name = "CursorMac";
+        layer_CursorPC {
+            display-name = "CursorPC";
             bindings = <
-                &none     &none     &none     &none     &cur_CUT_Mac          &none             &kp HOME  &kp LG(UP) &kp LG(DOWN) &kp END
-        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_COPY_Mac         &kp LEFT          &kp DOWN  &kp UP     &kp RIGHT    &none   &kp SQT
-                &none     &none     &none     &none     &cur_PASTE_Mac        &cur_PASTE_Mac    &kp PG_DN &kp PG_UP  &kp HOME     &kp END
-                                    &none     &none     &none                 &none             &none     &none
+                &none     &none     &none     &none     &cur_CUT_v1_TKZ       &none             &kp LC(LEFT) &kp LC(UP) &kp LC(DOWN) &kp LC(RIGHT)
+        &kp ESC &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &cur_Ctrl_Insert      &kp LEFT          &kp DOWN     &kp UP     &kp RIGHT    &none   &kp SQT
+                &none     &none     &none     &none     &cur_Shift_Insert     &cur_Shift_Insert &kp PG_DN    &kp PG_UP  &kp HOME     &kp END
+                                    &none     &none     &none                 &none             &none        &none
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp PG_DN PG_UP>;
@@ -828,13 +835,25 @@
             sensor-bindings = <&rotate_alt_fb &inc_dec_kp RIGHT LEFT>;
         };
 
-        layer_Number {
-            display-name = "Number";
+        layer_NumberPC {
+            display-name = "NumberPC";
             bindings = <
                 &none    &none     &none     &none     &none      &kp LS(G)       &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
         &kp ESC &kp LGUI &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC   &kp KP_PLUS     &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
                 &none    &kp EQUAL &kp COMMA &kp SPACE &kp DEL    &kp KP_MULTIPLY &kp N1  &kp N2  &kp N3  &kp KP_SLASH
                                    &none     &none     &none      &kp EQUAL       &kp DOT &kp N0
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &rotate_home_end>;
+        };
+
+        layer_NumberMac {
+            display-name = "NumberMac";
+            bindings = <
+                &none     &none     &none     &none     &none      &kp LS(G)       &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
+        &kp ESC &kp LCTRL &kp LALT  &kp LGUI  &kp LSHFT &kp BSPC   &kp KP_PLUS     &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
+                &none     &kp EQUAL &kp COMMA &kp SPACE &kp DEL    &kp KP_MULTIPLY &kp N1  &kp N2  &kp N3  &kp KP_SLASH
+                                    &none     &none     &none      &kp EQUAL       &kp DOT &kp N0
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &rotate_home_end>;
