@@ -16,14 +16,14 @@
 #define LAYER_PC 1
 #define LAYER_Lower 2
 #define LAYER_Magic 3
-#define LAYER_CursorPC 4
-#define LAYER_CursorMac 5
+#define LAYER_CursorMac 4
+#define LAYER_CursorPC 5
 #define LAYER_Symbol 6
-#define LAYER_NumberPC 7
-#define LAYER_NumberMac 8
+#define LAYER_NumberMac 7
+#define LAYER_NumberPC 8
 #define LAYER_Tmux 9
-#define LAYER_ShortcutPC 10
-#define LAYER_ShortcutMac 11
+#define LAYER_ShortcutMac 10
+#define LAYER_ShortcutPC 11
 #define LAYER_AltTab 12
 #define LAYER_CtrlTab 13
 
@@ -835,18 +835,6 @@
             sensor-bindings = <&rotate_alt_fb &inc_dec_kp RIGHT LEFT>;
         };
 
-        layer_NumberPC {
-            display-name = "NumberPC";
-            bindings = <
-                &none    &none     &none     &none     &none      &kp LS(G)       &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
-        &kp ESC &kp LGUI &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC   &kp KP_PLUS     &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
-                &none    &kp EQUAL &kp COMMA &kp SPACE &kp DEL    &kp KP_MULTIPLY &kp N1  &kp N2  &kp N3  &kp KP_SLASH
-                                   &none     &none     &none      &kp EQUAL       &kp DOT &kp N0
-            >;
-
-            sensor-bindings = <&inc_dec_kp RIGHT LEFT &rotate_home_end>;
-        };
-
         layer_NumberMac {
             display-name = "NumberMac";
             bindings = <
@@ -854,6 +842,18 @@
         &kp ESC &kp LCTRL &kp LALT  &kp LGUI  &kp LSHFT &kp BSPC   &kp KP_PLUS     &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
                 &none     &kp EQUAL &kp COMMA &kp SPACE &kp DEL    &kp KP_MULTIPLY &kp N1  &kp N2  &kp N3  &kp KP_SLASH
                                     &none     &none     &none      &kp EQUAL       &kp DOT &kp N0
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &rotate_home_end>;
+        };
+
+        layer_NumberPC {
+            display-name = "NumberPC";
+            bindings = <
+                &none    &none     &none     &none     &none      &kp LS(G)       &kp N7  &kp N8  &kp N9  &kp LS(SEMI)
+        &kp ESC &kp LGUI &kp LALT  &kp LCTRL &kp LSHFT &kp BSPC   &kp KP_PLUS     &kp N4  &kp N5  &kp N6  &kp KP_MINUS &kp SQT
+                &none    &kp EQUAL &kp COMMA &kp SPACE &kp DEL    &kp KP_MULTIPLY &kp N1  &kp N2  &kp N3  &kp KP_SLASH
+                                   &none     &none     &none      &kp EQUAL       &kp DOT &kp N0
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &rotate_home_end>;
@@ -871,18 +871,6 @@
             sensor-bindings = <&rotate_alt_tab_shifttab &inc_dec_kp DOWN UP>;
         };
 
-        layer_ShortcutPC {
-            display-name = "ShortcutPC";
-            bindings = <
-                &none     &none     &none     &none     &none       &kp LA(GRAVE) &kp LA(N7)  &kp LA(N8) &kp LA(N9)    &none
-        &none   &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &none       &none         &kp LA(N4)  &kp LA(N5) &kp LC(GRAVE) &none &none
-                &none     &none     &none     &none     &none       &none         &kp LA(N1)  &kp LA(N2) &kp LA(N3)    &none
-                                    &none     &none     &none       &kp LC(F6)    &kp LS(F6)  &kp LA(N0)
-            >;
-
-            sensor-bindings = <&inc_dec_kp RIGHT LEFT &scroll_up_down>;
-        };
-
         layer_ShortcutMAC {
             display-name = "ShortcutMac";
             bindings = <
@@ -890,6 +878,18 @@
         &none   &kp LCTRL &kp LALT  &kp LCMD  &kp LSHFT &none       &kp CAPSLOCK  &kp LG(N4)  &kp LG(N5) &kp LC(GRAVE) &caps_lock_twice &none
                 &none     &none     &none     &none     &none       &none         &kp LG(N1)  &kp LG(N2) &kp LG(N3)    &none
                                     &none     &none     &none       &kp LG(F6)    &kp LS(F6)  &kp LG(N0)
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT LEFT &scroll_up_down>;
+        };
+
+        layer_ShortcutPC {
+            display-name = "ShortcutPC";
+            bindings = <
+                &none     &none     &none     &none     &none       &kp LA(GRAVE) &kp LA(N7)  &kp LA(N8) &kp LA(N9)    &none
+        &none   &kp LGUI  &kp LALT  &kp LCTRL &kp LSHFT &none       &none         &kp LA(N4)  &kp LA(N5) &kp LC(GRAVE) &none &none
+                &none     &none     &none     &none     &none       &none         &kp LA(N1)  &kp LA(N2) &kp LA(N3)    &none
+                                    &none     &none     &none       &kp LC(F6)    &kp LS(F6)  &kp LA(N0)
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &scroll_up_down>;
