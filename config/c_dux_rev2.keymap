@@ -647,6 +647,13 @@
             key-positions = <POS_LH_C3R2 POS_LH_C3R3>;
             bindings = <&kp MINUS>;
         };
+        // left ring finger
+        combo_pc_left_gui{
+            key-positions = <POS_LH_C4R2 POS_LH_C4R3>;
+            layers = <LAYER_PC>;
+            bindings = <&kp LGUI>;
+        };
+
         // right index finger
         combo_capsword_right {
             key-positions = <POS_RH_C2R2 POS_RH_C2R3>;
@@ -662,6 +669,12 @@
             key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
             layers = <LAYER_Mac>;
             bindings = <&lctrl_space>;
+        };
+        // right ring finger
+        combo_pc_right_gui {
+            key-positions = <POS_RH_C4R2 POS_RH_C4R3>;
+            layers = <LAYER_PC>;
+            bindings = <&kp RGUI>;
         };
 
         combo_alt_tab_switch_thumb {
@@ -766,10 +779,10 @@
             * English in Chinese input method. */
             display-name = "PC";
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                    &kp U     &kp I     &kp O     &kp P
-        &kp ESC &HRM_left_pinky_v1_TKZ LGUI A  &HRM_left_ring1_v1_TKZ LALT S  &HRM_left_middy_v1_TKZ LCTRL D  &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ LSHFT J  &HRM_right_middy_v1_TKZ RCTRL K  &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ LGUI SEMI  &kp SQT
-                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                              &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
-                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_NumberPC TAB &thumb_v2_TKZ LAYER_ShortcutPC LSHFT                &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y                                                                                   &kp U     &kp I     &kp O     &kp P
+        &kp ESC &HRM_left_pinky_v1_TKZ LCTRL A  &HRM_left_ring1_v1_TKZ LALT S &HRM_left_middy_v1_TKZ LCTRL D &HRM_left_index_v1_TKZ LSHFT F  &kp G &kp H  &HRM_right_index_v1_TKZ RSHFT J  &HRM_right_middy_v1_TKZ RCTRL K &HRM_right_ring1_v1_TKZ LALT L  &HRM_right_pinky_v1_TKZ RCTRL SEMI  &kp SQT
+                &kp Z     &kp X     &kp C     &kp V     &kp B                                                                                             &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                                    &thumb_v2_TKZ LAYER_CursorPC BSPC &thumb_v2_TKZ LAYER_NumberPC TAB &thumb_v2_TKZ LAYER_ShortcutPC LSHFT               &thumb_v2_TKZ LAYER_Lower DEL &thumb_v2_TKZ LAYER_Tmux ENTER &thumb_v2_TKZ LAYER_Symbol SPACE
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp DOWN UP>;
