@@ -43,6 +43,13 @@ fi
 COMMON_OPT="-DZMK_EXTRA_MODULES='${SRC_DIR}' -DZMK_CONFIG='${SRC_DIR}/config'"
 BOARD=nice_nano_v2
 
+# DEFAULT_LAYER: set to 'pc' to make PC layer the default (layer 0), otherwise Mac is default.
+if [[ "${DEFAULT_LAYER}" == "pc" ]]; then
+    echo "#define DEFAULT_LAYER_PC" > ${SRC_DIR}/config/default_layer.h
+else
+    echo "" > ${SRC_DIR}/config/default_layer.h
+fi
+
 build_v1() {
     west build -d build/c_dux_left -b $BOARD $LEFT_EXTRA_OPT -- $COMMON_OPT -DSHIELD="c_dux_left led_indicator" $LEFT_EXTRA_OPT2
     cp -a build/c_dux_left/zephyr/zmk.uf2 ${C_DUX_FIRMWARE_DIR}/c_dux_left.uf2
