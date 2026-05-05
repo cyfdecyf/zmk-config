@@ -364,8 +364,8 @@
         mod_tab_chord_v1_TKZ: mod_tab_chord_v1_TKZ {
             compatible = "zmk,behavior-macro-two-param";
             #binding-cells = <2>;
-            tap-ms = <0>;
-            wait-ms = <0>;
+            tap-ms = <15>;
+            wait-ms = <30>;
             bindings = <&macro_press>
                 , <&macro_param_2to1>
                 , <&mo 0>
@@ -385,8 +385,8 @@
         mod_tab_v1_TKZ: mod_tab_v1_TKZ {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
+            tap-ms = <15>;
+            wait-ms = <30>;
             bindings = <&macro_press>
                 , <&macro_param_1to1>
                 , <&kp N0>
